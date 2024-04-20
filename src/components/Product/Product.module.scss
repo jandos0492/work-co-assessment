@@ -1,0 +1,155 @@
+@use '/src/styles/breakpoints.scss';
+@use '/src/styles/typography.scss';
+@use '/src/styles/variables.scss';
+@use '/src/styles/functions.scss';
+
+.product {
+  margin: 0 0 25px;
+  width: 100%;
+
+  @include breakpoints.medium {
+    margin: 0 0 40px;
+    width: functions.getColumns(6.5, variables.$bp-medium);
+
+    &:last-child {
+      margin-left: functions.getColumns(1, variables.$bp-medium);
+    }
+  }
+
+  @include breakpoints.large {
+    width: functions.getColumns(7, variables.$bp-large);
+
+    &:last-child {
+      margin-left: functions.getColumns(1, variables.$bp-large);
+    }
+  }
+}
+
+.inCart {
+  display: flex;
+  align-items: flex-start;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @include breakpoints.medium {
+    flex-wrap: wrap;
+    width: functions.getColumns(5.5, variables.$bp-medium);
+
+    &:last-child {
+      margin-left: 0;
+    }
+
+    &:nth-last-child(2):nth-child(odd) {
+      margin-bottom: 0;
+    }
+  }
+
+  @include breakpoints.large {
+    width: functions.getColumns(7, variables.$bp-large);
+
+    &:last-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.featured {
+  width: 100%;
+
+  @include breakpoints.large {
+    width: functions.getColumns(14, variables.$bp-large);
+  }
+}
+
+.image {
+  width: 100%;
+
+  .inProductLanding & {
+    margin-bottom: 10px;
+  }
+
+  .featured & {
+    @include breakpoints.small-only {
+      // Modern browsers see a more optimal crop on mobile
+      height: functions.getColumns(calc(15 * 445 / 315), variables.$bp-small);
+      object-fit: cover;
+    }
+  }
+
+  .inCart & {
+    flex-shrink: 0;
+    width: functions.getColumns(6, variables.$bp-small);
+
+    @include breakpoints.medium {
+      margin-bottom: 15px;
+      width: 100%;
+    }
+  }
+}
+
+.details {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .inCart & {
+    width: 50%;
+    margin-top: 4px;
+    margin-left: functions.getColumns(1, variables.$bp-small);
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    @include breakpoints.medium {
+      width: 100%;
+      flex-direction: row;
+      align-items: center;
+      margin-top: 0;
+      margin-left: 0;
+      flex-wrap: nowrap;
+    }
+  }
+}
+
+.text {
+  min-width: 0;
+
+  .inCart & {
+    width: 100%;
+    margin-bottom: 20px;
+
+    @include breakpoints.medium {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.title {
+  @include typography.body;
+  margin-right: 20px;
+  font-weight: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.price {
+  @include typography.price;
+  display: block;
+  margin-top: -3px;
+}
+
+.addButton {
+  flex-shrink: 0;
+  align-self: flex-start;
+  // Keep button width the same when text changes
+  min-width: 114px;
+
+  // On desktop, only disable Add to Bag on hover
+  .isAddable:not(:hover) & {
+    @include breakpoints.large {
+      opacity: 0;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+@use '/src/styles/breakpoints.scss';
+@use '/src/styles/variables.scss';
+@use '/src/styles/functions.scss';
+
+.wrapper {
+  padding: 35px 30px;
+  width: 100%;
+  height: 100%;
+
+  @include breakpoints.medium {
+    padding: 35px functions.getColumns(1, variables.$bp-medium);
+  }
+
+  @include breakpoints.large {
+    padding: 35px functions.getColumns(1, variables.$bp-large);
+  }
+}
+
+.cartIconWrapper {
+  position: absolute;
+  top: 35px;
+  right: 30px;
+
+  @include breakpoints.medium {
+    right: functions.getColumns(1, variables.$bp-medium);
+  }
+
+  @include breakpoints.large {
+    right: functions.getColumns(1, variables.$bp-large);
+  }
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 35px;
+
+  @include breakpoints.medium {
+    margin: 0 0 45px;
+  }
+}
