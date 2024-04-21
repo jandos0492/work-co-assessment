@@ -2,7 +2,6 @@ import React from 'react';
 import './ProductModal.css';
 
 const ProductModal = ({ product, onClose, modalRef }) => {
-  console.log(product);
   return (
     <>
       {product && (

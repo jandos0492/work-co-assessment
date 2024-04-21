@@ -1,6 +1,12 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, {
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from 'react';
 import cx from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import AppContext from '../../contexts/AppContext';
 
@@ -25,6 +31,14 @@ function Cart() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRef = useRef(null);
 
+  const navigate = useNavigate();
+
+  const closeModal = useCallback(() => {
+    setSelectedProduct(null);
+    setIsModalOpen(false);
+    navigate('/');
+  }, [navigate]);
+
   useEffect(() => {
     const handleOutsideClick = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
@@ -44,16 +58,11 @@ function Cart() {
       document.body.classList.remove('modal-open');
       document.removeEventListener('mousedown', handleOutsideClick);
     };
-  }, [isModalOpen]);
+  }, [isModalOpen, closeModal]);
 
   const openModal = (product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setSelectedProduct(null);
-    setIsModalOpen(false);
   };
 
   return (
