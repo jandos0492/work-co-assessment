@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import Button from '../Button';
 import Quantity from '../Quantity';
 
-import { getImage } from '../../utils/images';
-import imageTypes from '../../constants/imageTypes';
+import './Product.css';
 
 import styles from './Product.module.scss';
 
@@ -31,21 +30,38 @@ const Product = ({
     [styles.isAddable]: !isAdded,
   });
 
-  const imageSrc = isFeatured
-    ? getImage(images, imageTypes.DEFAULT_RT)
-    : getImage(images);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
   const finalPrice = (price * count).toFixed(2);
+
+  const handleImageClick = (index) => {
+    setSelectedImageIndex(index);
+  };
 
   return (
     <div className={productClasses}>
       <img
         className={styles.image}
-        src={imageSrc}
+        src={images[selectedImageIndex].src}
         alt={title}
         onClick={() => openModal({ title, images, price })}
       />
       <div className={styles.details}>
         <div className={styles.text}>
+          <div className="product-images">
+            <ul className="product-list">
+              {images.map((image, index) => (
+                <li key={index}>
+                  <img
+                    src={image.src}
+                    alt={title}
+                    className="image"
+                    onClick={() => handleImageClick(index)}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
           <h2
             className={styles.title}
             onClick={() => openModal({ title, images, price })}
