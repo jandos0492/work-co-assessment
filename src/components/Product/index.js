@@ -21,6 +21,7 @@ const Product = ({
   onIncrement,
   price,
   title,
+  openModal,
 }) => {
   const isInCart = onIncrement && onDecrement;
   const productClasses = cx(className, styles.product, {
@@ -37,10 +38,20 @@ const Product = ({
 
   return (
     <div className={productClasses}>
-      <img className={styles.image} src={imageSrc} alt={title} />
+      <img
+        className={styles.image}
+        src={imageSrc}
+        alt={title}
+        onClick={() => openModal({ title, images, price })}
+      />
       <div className={styles.details}>
         <div className={styles.text}>
-          <h2 className={styles.title}>{title}</h2>
+          <h2
+            className={styles.title}
+            onClick={() => openModal({ title, images, price })}
+          >
+            {title}
+          </h2>
           <span className={styles.price}>${finalPrice}</span>
         </div>
         {isInCart ? (

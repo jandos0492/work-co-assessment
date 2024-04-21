@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import cx from 'classnames';
 import { Link } from 'react-router-dom';
 
@@ -6,6 +6,7 @@ import AppContext from '../../contexts/AppContext';
 
 import Product from '../../components/Product';
 import Button from '../../components/Button';
+import ProductModal from '../../components/ProductModal';
 
 import empty from '../../assets/empty.png';
 import close from '../../assets/close.svg';
@@ -19,6 +20,41 @@ function Cart() {
   const innerClasses = cx(styles.inner, {
     [styles.empty]: !cartItems.length,
   });
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
+        closeModal();
+      }
+    };
+
+    if (isModalOpen) {
+      document.body.classList.add('modal-open');
+      document.addEventListener('mousedown', handleOutsideClick);
+    } else {
+      document.body.classList.remove('modal-open');
+      document.removeEventListener('mousedown', handleOutsideClick);
+    }
+
+    return () => {
+      document.body.classList.remove('modal-open');
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [isModalOpen]);
+
+  const openModal = (product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedProduct(null);
+    setIsModalOpen(false);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -39,6 +75,7 @@ function Cart() {
                     key={cartItem.id}
                     onIncrement={() => incrementItem(cartItem)}
                     onDecrement={() => decrementItem(cartItem)}
+                    openModal={openModal}
                   />
                 ))}
               </ul>
@@ -94,6 +131,11 @@ function Cart() {
           </>
         )}
       </div>
+      <ProductModal
+        product={selectedProduct}
+        onClose={closeModal}
+        modalRef={modalRef}
+      />
     </div>
   );
 }
