@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 
 import AppContext from '../../contexts/AppContext';
 import CartButton from '../../components/CartButton';
@@ -17,27 +17,6 @@ function ProductLanding() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRef = useRef(null);
-
-  useEffect(() => {
-    const handleOutsideClick = (e) => {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
-        closeModal();
-      }
-    };
-
-    if (isModalOpen) {
-      document.body.classList.add('modal-open');
-      document.addEventListener('mousedown', handleOutsideClick);
-    } else {
-      document.body.classList.remove('modal-open');
-      document.removeEventListener('mousedown', handleOutsideClick);
-    }
-
-    return () => {
-      document.body.classList.remove('modal-open');
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, [isModalOpen]);
 
   const openModal = (product) => {
     setSelectedProduct(product);
@@ -68,8 +47,9 @@ function ProductLanding() {
       />
       <ProductModal
         product={selectedProduct}
-        onClose={closeModal}
+        closeModal={closeModal}
         modalRef={modalRef}
+        isModalOpen={isModalOpen}
       />
     </main>
   );

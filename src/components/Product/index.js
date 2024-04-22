@@ -21,6 +21,8 @@ const Product = ({
   price,
   title,
   openModal,
+  id,
+  description,
 }) => {
   const isInCart = onIncrement && onDecrement;
   const productClasses = cx(className, styles.product, {
@@ -44,7 +46,7 @@ const Product = ({
         className={styles.image}
         src={images[selectedImageIndex].src}
         alt={title}
-        onClick={() => openModal({ title, images, price })}
+        onClick={() => openModal({ title, images, price, id, description })}
       />
       <div className={styles.details}>
         <div className={styles.text}>

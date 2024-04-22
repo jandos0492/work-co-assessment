@@ -5,7 +5,7 @@ import mockProducts from '../../mocks/products';
 
 import ProductList from './index';
 
-const products = mockProducts.slice(0, 5);
+const products = mockProducts.slice(0, 6);
 
 export default {
   component: ProductList,

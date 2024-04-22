@@ -14,7 +14,6 @@ function ProductList({ addItem, products, cartItems, openModal }) {
       key={product.id}
       isFeatured={isFeatured}
       openModal={openModal}
-      prod={product}
     />
   );
 

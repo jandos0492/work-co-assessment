@@ -1,10 +1,4 @@
-import React, {
-  useContext,
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-} from 'react';
+import React, { useContext, useState, useRef, useCallback } from 'react';
 import cx from 'classnames';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -38,27 +32,6 @@ function Cart() {
     setIsModalOpen(false);
     navigate('/');
   }, [navigate]);
-
-  useEffect(() => {
-    const handleOutsideClick = (e) => {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
-        closeModal();
-      }
-    };
-
-    if (isModalOpen) {
-      document.body.classList.add('modal-open');
-      document.addEventListener('mousedown', handleOutsideClick);
-    } else {
-      document.body.classList.remove('modal-open');
-      document.removeEventListener('mousedown', handleOutsideClick);
-    }
-
-    return () => {
-      document.body.classList.remove('modal-open');
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, [isModalOpen, closeModal]);
 
   const openModal = (product) => {
     setSelectedProduct(product);
@@ -142,8 +115,9 @@ function Cart() {
       </div>
       <ProductModal
         product={selectedProduct}
-        onClose={closeModal}
+        closeModal={closeModal}
         modalRef={modalRef}
+        isModalOpen={isModalOpen}
       />
     </div>
   );
