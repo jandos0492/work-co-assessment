@@ -24,6 +24,12 @@ const ProductModal = ({ product, closeModal, modalRef, isModalOpen }) => {
     };
   }, [isModalOpen]);
 
+  let imagePreview = [];
+
+  if (product) {
+    imagePreview = product.images.filter((image) => image.src.includes('-sq'));
+  }
+
   return (
     <>
       {product && isModalOpen && (
@@ -37,7 +43,7 @@ const ProductModal = ({ product, closeModal, modalRef, isModalOpen }) => {
                 <div className="modal-info-1">
                   <h2 className="modal-title">{product.title}</h2>
                   <img
-                    src={product.images[selectedImageIndex].src}
+                    src={imagePreview[selectedImageIndex].src}
                     alt={product.title}
                     className="modal-image"
                   />
@@ -45,7 +51,7 @@ const ProductModal = ({ product, closeModal, modalRef, isModalOpen }) => {
                 </div>
                 <div className="modal-info-2">
                   <ul className="product-modal-list">
-                    {product.images.map((image, index) => (
+                    {imagePreview.map((image, index) => (
                       <li key={index}>
                         <img
                           src={image.src}

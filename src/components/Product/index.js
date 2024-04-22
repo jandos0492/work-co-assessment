@@ -40,11 +40,13 @@ const Product = ({
     setSelectedImageIndex(index);
   };
 
+  const imagePreview = images.filter((image) => image.src.includes('-sq'));
+
   return (
     <div className={productClasses}>
       <img
         className={styles.image}
-        src={images[selectedImageIndex].src}
+        src={imagePreview[selectedImageIndex].src.replace('-sq', '-rt')}
         alt={title}
         onClick={() => openModal({ title, images, price, id, description })}
       />
@@ -52,7 +54,7 @@ const Product = ({
         <div className={styles.text}>
           <div className="product-images">
             <ul className="product-list">
-              {images.map((image, index) => (
+              {imagePreview.map((image, index) => (
                 <li key={index}>
                   <img
                     src={image.src}
