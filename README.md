@@ -33,6 +33,7 @@ Here are some screnshots of Project:
 - Implement the PDP image picker, so clicking on a thumbnail changes the featured image (no animation/transition between images is required)
 - Don't worry about wiring up quantity/Add to Bag buttons
 - No specific loading/404 behavior is required, as long as these events do not lead to an error
+- As a small bonus added the PDP image picker functionality to the Modal page.
 
 
 
