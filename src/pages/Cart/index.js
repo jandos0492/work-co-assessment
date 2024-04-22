@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useRef, useCallback } from 'react';
 import cx from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import AppContext from '../../contexts/AppContext';
 
 import Product from '../../components/Product';
 import Button from '../../components/Button';
+import ProductModal from '../../components/ProductModal';
 
 import empty from '../../assets/empty.png';
 import close from '../../assets/close.svg';
@@ -19,6 +20,23 @@ function Cart() {
   const innerClasses = cx(styles.inner, {
     [styles.empty]: !cartItems.length,
   });
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const modalRef = useRef(null);
+
+  const navigate = useNavigate();
+
+  const closeModal = useCallback(() => {
+    setSelectedProduct(null);
+    setIsModalOpen(false);
+    navigate('/');
+  }, [navigate]);
+
+  const openModal = (product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -39,6 +57,7 @@ function Cart() {
                     key={cartItem.id}
                     onIncrement={() => incrementItem(cartItem)}
                     onDecrement={() => decrementItem(cartItem)}
+                    openModal={openModal}
                   />
                 ))}
               </ul>
@@ -94,6 +113,12 @@ function Cart() {
           </>
         )}
       </div>
+      <ProductModal
+        product={selectedProduct}
+        closeModal={closeModal}
+        modalRef={modalRef}
+        isModalOpen={isModalOpen}
+      />
     </div>
   );
 }

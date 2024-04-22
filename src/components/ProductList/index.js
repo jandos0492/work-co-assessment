@@ -5,7 +5,7 @@ import Product from '../Product';
 
 import styles from './ProductList.module.scss';
 
-function ProductList({ addItem, products, cartItems }) {
+function ProductList({ addItem, products, cartItems, openModal }) {
   const renderProduct = (product, isFeatured) => (
     <Product
       {...product}
@@ -13,6 +13,7 @@ function ProductList({ addItem, products, cartItems }) {
       onClick={() => addItem(product)}
       key={product.id}
       isFeatured={isFeatured}
+      openModal={openModal}
     />
   );
 

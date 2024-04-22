@@ -1,0 +1,145 @@
+body.modal-open-body {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 80%;
+    max-width: 1200px;
+    max-height: 700px;
+    height: 80%;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+.modal-info {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.modal-info-2 {
+    padding-top: 70px;
+}
+
+.modal-product-list {
+    display: flex;
+}
+
+.modal-title {
+    margin: 20px;
+}
+
+.product-modal-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+}
+
+.product-modal-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.product-modal-description {
+    padding-top: 20px;
+}
+
+.modal-title .modal-price,
+.product-modal-description {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 20px;
+}
+
+.modal-open {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-image {
+    width: 400px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.close {
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #333;
+    font-size: 24px;
+}
+
+@media screen and (max-width: 1500px) {
+    .modal {
+        width: 60%;
+        top: 40%
+    }
+}
+
+@media screen and (max-width: 1450px) {
+    .product-modal-description {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    .product-modal-image {
+        width: 60px;
+        height: 60px;
+    }
+
+    .modal-image {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .modal-image {
+        width: 250px;
+        height: 250px;
+    }
+
+    .product-modal-image {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .modal {
+        width: 80%;
+        height: 60%;
+        top: 40%
+    }
+
+}
+
+@media screen and (max-width: 670px) {
+    .modal-image {
+        width: 180px;
+        height: 180px;
+    }
+
+    .product-modal-image {
+        width: 35px;
+        height: 35px;
+    }
+
+    .modal-info {
+        gap: 20px;
+    }
+}
