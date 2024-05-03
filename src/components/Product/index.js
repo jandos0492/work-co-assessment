@@ -45,7 +45,7 @@ const Product = ({
   return (
     <div className={productClasses}>
       <img
-        className={styles.image}
+        className={`${styles.image} product-image`}
         src={imagePreview[selectedImageIndex].src.replace('-sq', '-rt')}
         alt={title}
         onClick={() => openModal({ title, images, price, id, description })}
@@ -67,7 +67,7 @@ const Product = ({
             </ul>
           </div>
           <h2
-            className={styles.title}
+            className={`${styles.title} product-title`}
             onClick={() => openModal({ title, images, price })}
           >
             {title}
