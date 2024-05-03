@@ -17,7 +17,7 @@
     "lint": "eslint './src/**/*.js'",
     "lint:fix": "yarn lint --fix",
     "start": "react-scripts start",
-    "build": "npm install --legacy-peer-deps && npm run build",
+    "build": "npm install --legacy-peer-deps && npm install --force && npm run build",
     "test": "react-scripts test",
     "test:coverage": "react-scripts test --coverage --watchAll=false",
     "storybook": "storybook dev -p 6006",
